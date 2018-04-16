@@ -5,6 +5,7 @@ using Global;
 public class Rock : MonoBehaviour {
 
     GameManager GM = null;
+    private float SelfTimer;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +14,11 @@ public class Rock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.Translate(-Vector3.up * GM.gameSpeed, Space.World);
+        SelfTimer += Time.deltaTime;
+        this.transform.Translate(-Vector3.up * 0.016f *GM.gameSpeed, Space.World);
+        if (SelfTimer > 30)
+        {
+            Destroy(this.gameObject);
+        }
 	}
 }
