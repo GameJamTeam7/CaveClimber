@@ -552,6 +552,21 @@ Prefab:
       propertyPath: spawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1610936934}
+    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
+        type: 2}
+      propertyPath: startingSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
+        type: 2}
+      propertyPath: difficultyCurve
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
+        type: 2}
+      propertyPath: increaseInterval
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b91c2522dcf2674789baad3685e2229, type: 2}
   m_IsPrefabParent: 0
