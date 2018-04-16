@@ -42,9 +42,9 @@ public class ButtonManager : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButtonDown(0))
+        foreach (Touch touch in Input.touches)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = cam.ScreenPointToRay(touch.position);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == "Button")
@@ -52,6 +52,7 @@ public class ButtonManager : MonoBehaviour
                     Destroy(hit.transform.gameObject);
                 }
             }
+
         }
 
     }
