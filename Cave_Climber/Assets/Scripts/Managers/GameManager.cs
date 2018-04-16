@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     private float startingSpeed;
     [SerializeField]
     [Tooltip("How Much Score Is Incressed By When A Button Is Hit")]
-    private float scoreMultiplyer;
+    private float scoreToAdd;
     #endregion
 
     #region private variables
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     public void IncresseScore()
     {
-        score = score * scoreMultiplyer;
+        score = score + scoreToAdd;
     }
 
 }
