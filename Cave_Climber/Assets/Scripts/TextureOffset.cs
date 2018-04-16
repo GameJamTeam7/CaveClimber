@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Global;
 
 public class TextureOffset : MonoBehaviour {
 
@@ -18,7 +17,7 @@ public class TextureOffset : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        AcumulatedTime += Time.deltaTime * GM.gameSpeed;
+        AcumulatedTime += Time.deltaTime * GM.GameSpeed;
         float offset = AcumulatedTime;
 
         GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offset);
