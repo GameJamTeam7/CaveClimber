@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,8 +28,12 @@ public class GameManager : MonoBehaviour
     private float increaseInterval;
     [SerializeField]
     private float maxButtonsPerSecond;
-    [SerializeField] [Tooltip("Starting Speed")]
+    [SerializeField]
+    [Tooltip("Starting Speed")]
     private float startingSpeed;
+    [SerializeField]
+    [Tooltip("How Much Score Is Incressed By When A Button Is Hit")]
+    private float scoreMultiplyer;
     #endregion
 
     #region private variables
@@ -37,6 +42,9 @@ public class GameManager : MonoBehaviour
     private float difficulty;
     private float buttonsPerSecond;
     private float gameSpeed;
+    private Text scoreText;
+    private float score;
+
     #endregion
 
     #region Gets and Sets
@@ -52,13 +60,15 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(buttonsPerSecond > maxButtonsPerSecond)
+            if (buttonsPerSecond > maxButtonsPerSecond)
             {
                 buttonsPerSecond = maxButtonsPerSecond;
             }
             return buttonsPerSecond;
         }
     }
+
+
     #endregion
 
 
@@ -66,12 +76,15 @@ public class GameManager : MonoBehaviour
     {
         buttonsPerSecond = maxButtonsPerSecond;
         gameSpeed = startingSpeed;
+
+        scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
     }
 
     void Update()
     {
         difficultyTimer += Time.deltaTime;
         gameTimer += Time.deltaTime;
+        score += Time.deltaTime;
 
         if (difficultyTimer >= increaseInterval)
         {
@@ -81,7 +94,7 @@ public class GameManager : MonoBehaviour
                 difficulty = (Mathf.Pow(gameSpeed, difficultyCurve) / 100);
                 gameSpeed += difficulty;
                 buttonsPerSecond -= difficulty;
-              //  Debug.Log(bpm);
+                //  Debug.Log(bpm);
 
             }
             else
@@ -90,7 +103,15 @@ public class GameManager : MonoBehaviour
             }
         }
 
+
+        scoreText.text = ((int)score).ToString();
     }
+
+    public void IncresseScore()
+    {
+        score = score * scoreMultiplyer;
+    }
+
 }
 
 
