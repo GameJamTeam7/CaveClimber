@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
 
     public void TakeDamage()
     {
+        Debug.Log("damage Taken");
         foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
         {
             Destroy(button);
