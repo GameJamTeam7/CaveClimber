@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    public enum GameStates
+    public enum GameState
     {
         MenuState,
         GameState,
@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     private Text scoreText;
     private float score;
 
+    private GameState currentGameState;
+
     #endregion
 
     #region Gets and Sets
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        currentGameState = GameState.MenuState;
         buttonsPerSecond = maxButtonsPerSecond;
         gameSpeed = startingSpeed;
 
@@ -82,35 +85,67 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        difficultyTimer += Time.deltaTime;
-        gameTimer += Time.deltaTime;
-        score += Time.deltaTime;
-
-        if (difficultyTimer >= increaseInterval)
+        if(currentGameState == GameState.MenuState)
         {
-            difficultyTimer = 0.0f;
-            if (gameSpeed < maxButtonsPerSecond)
-            {
-                difficulty = (Mathf.Pow(gameSpeed, difficultyCurve) / 100);
-                gameSpeed += difficulty;
-                buttonsPerSecond -= difficulty;
-                //  Debug.Log(bpm);
 
-            }
-            else
-            {
-                gameSpeed = maxButtonsPerSecond;
-            }
         }
 
+        else if (currentGameState == GameState.GameState)
+        {
 
-        scoreText.text = ((int)score).ToString();
+            difficultyTimer += Time.deltaTime;
+            gameTimer += Time.deltaTime;
+            score += Time.deltaTime;
+
+            if (difficultyTimer >= increaseInterval)
+            {
+                difficultyTimer = 0.0f;
+                if (gameSpeed < maxButtonsPerSecond)
+                {
+                    difficulty = (Mathf.Pow(gameSpeed, difficultyCurve) / 100);
+                    gameSpeed += difficulty;
+                    buttonsPerSecond -= difficulty;
+                    //  Debug.Log(bpm);
+                }
+                else
+                {
+                    gameSpeed = maxButtonsPerSecond;
+                }
+            }
+            scoreText.text = ((int)score).ToString();
+
+        }
+
+        else if(currentGameState == GameState.PauseState)
+        {
+
+        }
+        else
+        {
+
+        }
+
     }
 
     public void IncresseScore()
     {
         score = score + scoreToAdd;
     }
+
+    public void PauseGame()
+    {
+        currentGameState = GameState.PauseState;
+        Time.timeScale = 0;
+    }
+
+    public void TakeDamage()
+    {
+        foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+        {
+            Destroy(button);
+        }
+    }
+
 
 }
 
