@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameManager
   - Button
+  - Score
   layers:
   - Default
   - TransparentFX
