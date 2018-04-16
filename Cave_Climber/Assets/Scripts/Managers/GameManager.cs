@@ -10,12 +10,12 @@ namespace Global
 
         void Start()
         {
-
+            gameSpeed = 0.1f;
         }
 
         void Update()
         {
-
+            
         }
     }
 }
