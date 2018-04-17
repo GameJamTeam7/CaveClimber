@@ -234,7 +234,10 @@ namespace Global
             audioSource.clip = audioClips[0];
             audioSource.Play();
             score = score + scoreToAdd;
-            Player.transform.Translate(Vector3.up * playerClimbAmount);
+            if (Player.transform.position.y < (cam.transform.position.y + (0.5 * cam.orthographicSize)))
+            {
+                Player.transform.Translate(Vector3.up * playerClimbAmount);
+            }
         }
 
         public void PauseGame()
@@ -258,7 +261,7 @@ namespace Global
             Debug.Log("damage Taken:" + --Health);
             Player.transform.Translate(0, -playerFallDisance, 0);
             //GameOver
-            if (transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize + 2)))
+            if (Player.transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize)))
             {
                 Die();
             }
