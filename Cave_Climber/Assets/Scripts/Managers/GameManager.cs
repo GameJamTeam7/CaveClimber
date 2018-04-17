@@ -72,6 +72,13 @@ namespace Global
                 return buttonsPerSecond;
             }
         }
+        public GameState CurrentGameState
+        {
+            get
+            {
+                return currentGameState;
+            }
+        }
 
 
         #endregion
@@ -121,7 +128,8 @@ namespace Global
                 scoreText.text = ((int)score).ToString();
 
                 //>>>>>>> a16bda3a95b9e05da60c5ef0f040a7af8ba36143
-                if (Player.transform.position.magnitude - PlayerStartPos.magnitude <  1.5)
+                //PlayerMove
+                if (Player.transform.position.magnitude - PlayerStartPos.magnitude <  0.09)
                 {
                     Player.transform.Translate(Vector3.up * MoveSpeed);
                 }
@@ -152,12 +160,16 @@ namespace Global
         public void TakeDamage()
         {
             Debug.Log("damage Taken:" + --Health);
+            //Player.transform.Translate(0, -10, 0);
+            //GameOver
+            //if (Health == 0)
+            //{
+            //    currentGameState = GameState.EndState;
+            //}
             foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
             {
                 Destroy(button);
             }
-            //CharacterMovement
-
         }
     }
 }
