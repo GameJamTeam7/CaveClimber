@@ -60,7 +60,6 @@ namespace Global
 
         private bool firstLoop;
 
-        private Canvas currentCanvas;
         private Canvas mainMenu;
         private Canvas gamePlay;
         private Canvas endGame;
@@ -117,7 +116,6 @@ namespace Global
             pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu_Canvas").GetComponent<Canvas>();
             credits = GameObject.FindGameObjectWithTag("Credits_Canvas").GetComponent<Canvas>();
 
-            currentCanvas = mainMenu;
 
             firstLoop = true;
 
