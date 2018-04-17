@@ -253,8 +253,16 @@ namespace Global
 
         public void OpenCanavs()
         {
-            currentGameState = GameState.CreditsState;
-            firstLoop = true;
+            if (currentGameState == GameState.MenuState)
+            {
+                currentGameState = GameState.CreditsState;
+                firstLoop = true;
+            }
+            else if(currentGameState == GameState.CreditsState)
+            {
+                currentGameState = GameState.MenuState;
+                firstLoop = true;
+            }
         }
 
         private void DisableOtherCanvases(Canvas a_canvas)
