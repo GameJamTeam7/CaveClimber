@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d66b76bbebb1ef440be26a43a6c6cfe7
-timeCreated: 1523918861
+guid: 5fd27b2502821cf4d9f7f892c315d826
+timeCreated: 1523936814
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -53,9 +53,7 @@ ModelImporter:
     400042: root_03
     400044: root_04
     400046: skeleton
-    2100000: lambert2
-    2100002: blinn1
-    2100004: lambert1
+    2100000: mat_filling_props
     2300000: bones_finger
     2300002: bones_hand
     2300004: bones_hip

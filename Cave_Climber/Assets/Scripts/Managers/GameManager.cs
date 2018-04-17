@@ -22,17 +22,19 @@ namespace Global
         [SerializeField]
         [Tooltip("Changes How Hard The Game Is Each Incresses")]
         private float difficultyCurve;
-        [Tooltip("How Often The Game Incresses Difficulty")]
-        [SerializeField]
+
+        [SerializeField] [Tooltip("How Quickly Buttons Are Spawned")]
+        private float buttonSpawnRate;
+
+        [Tooltip("How Often The Game Incresses Difficulty")] [SerializeField]
         private float increaseInterval;
-        [SerializeField]
-        private float maxButtonsPerSecond;
-        [SerializeField]
-        [Tooltip("Starting Speed")]
+
+        [SerializeField] [Tooltip("Starting Speed")]
         private float startingSpeed;
-        [SerializeField]
-        [Tooltip("How Much Score Is Incressed By When A Button Is Hit")]
+
+        [SerializeField] [Tooltip("How Much Score Is Incressed By When A Button Is Hit")]
         private float scoreToAdd;
+
         [SerializeField]
         private GameObject Player;
         #endregion
@@ -41,7 +43,6 @@ namespace Global
         private float gameTimer;
         private float difficultyTimer;
         private float difficulty;
-        private float buttonsPerSecond;
         private float gameSpeed;
         private Text scoreText;
         private float score;
@@ -74,12 +75,8 @@ namespace Global
         public float ButtonsPerSecond
         {
             get
-            {
-                if (buttonsPerSecond > maxButtonsPerSecond)
-                {
-                    buttonsPerSecond = maxButtonsPerSecond;
-                }
-                return buttonsPerSecond;
+            { 
+                return buttonSpawnRate;
             }
         }
         public GameState CurrentGameState
@@ -116,7 +113,7 @@ namespace Global
 
             firstLoop = true;
 
-            buttonsPerSecond = maxButtonsPerSecond;
+
             gameSpeed = startingSpeed;
             Health = 3;
             MoveSpeed = 0.0005f;
@@ -143,6 +140,8 @@ namespace Global
                     DisableOtherCanvases(gamePlay);
                     firstLoop = false;
                 }
+
+
                 difficultyTimer += Time.deltaTime;
                 gameTimer += Time.deltaTime;
                 score += Time.deltaTime;
@@ -150,17 +149,12 @@ namespace Global
                 if (difficultyTimer >= increaseInterval)
                 {
                     difficultyTimer = 0.0f;
-                    if (gameSpeed < maxButtonsPerSecond)
-                    {
+
                         difficulty = (Mathf.Pow(gameSpeed, difficultyCurve) / 100);
                         gameSpeed += difficulty;
-                        buttonsPerSecond -= difficulty;
+                        buttonSpawnRate -= difficulty;
                         //  Debug.Log(bpm);
-                    }
-                    else
-                    {
-                        gameSpeed = maxButtonsPerSecond;
-                    }
+                    
                 }
                 scoreText.text = ((int)score).ToString();
 
@@ -263,8 +257,16 @@ namespace Global
 
         public void OpenCanavs()
         {
-            currentGameState = GameState.CreditsState;
-            firstLoop = true;
+            if (currentGameState == GameState.MenuState)
+            {
+                currentGameState = GameState.CreditsState;
+                firstLoop = true;
+            }
+            else if(currentGameState == GameState.CreditsState)
+            {
+                currentGameState = GameState.MenuState;
+                firstLoop = true;
+            }
         }
 
         private void DisableOtherCanvases(Canvas a_canvas)
