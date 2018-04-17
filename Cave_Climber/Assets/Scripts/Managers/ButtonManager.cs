@@ -12,6 +12,14 @@ public class ButtonManager : MonoBehaviour
     private List<Transform> spawnPoints = new List<Transform>();
     [SerializeField]
     private GameObject buttonPrefab;
+    [SerializeField]
+    private GameObject badButtonPrefab;
+
+    [SerializeField]
+    private float gracePeriod;
+
+    [SerializeField]
+    private float badButtonPercent;
 
     #endregion
 
@@ -19,6 +27,8 @@ public class ButtonManager : MonoBehaviour
     private float buttonTimer;
     private Camera cam;
     private RaycastHit hit;
+    private float graceTimer;
+    private float randomChance;
 
 
     void Start()
@@ -33,11 +43,28 @@ public class ButtonManager : MonoBehaviour
     {
         if (gm.CurrentGameState == GameManager.GameState.GameState)
         {
+
+            graceTimer += Time.deltaTime;
             buttonTimer += Time.deltaTime;
             if (buttonTimer > gm.ButtonsPerSecond)
             {
                 buttonTimer = 0;
-                Instantiate(buttonPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].position, Quaternion.Euler(-90.0f, 0, 0));
+                if (graceTimer > gracePeriod)
+                {
+                    randomChance = Random.Range(0, 100);
+                    if(randomChance <= gracePeriod)
+                    {
+                        Instantiate(buttonPrefab, spawnPoints[Random.Range(0, spawnPoints.Count)].position, Quaternion.Euler(-90.0f, 0, 0));
+                    }
+                    else
+                    {
+                        Instantiate(badButtonPrefab, spawnPoints[Random.Range(0, spawnPoints.Count)].position, Quaternion.Euler(-90.0f, 0, 0));
+                    }
+                }
+                else
+                {
+                    Instantiate(buttonPrefab, spawnPoints[Random.Range(0, spawnPoints.Count)].position, Quaternion.Euler(-90.0f, 0, 0));
+                }
             }
 
 #if UNITY_EDITOR
@@ -50,6 +77,10 @@ public class ButtonManager : MonoBehaviour
                     {
                         gm.IncresseScore();
                         Destroy(hit.transform.gameObject);
+                    }
+                    else if(hit.transform.tag == "BadButton")
+                    {
+                        gm.TakeDamage();
                     }
                 }
             }
@@ -66,6 +97,10 @@ public class ButtonManager : MonoBehaviour
                     {
                         gm.IncresseScore();
                         Destroy(hit.transform.gameObject);
+                    }
+                    else if (hit.transform.tag == "BadButton")
+                    {
+                        gm.TakeDamage();
                     }
                 }
 
