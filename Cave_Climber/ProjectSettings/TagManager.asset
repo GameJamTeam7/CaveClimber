@@ -12,6 +12,7 @@ TagManager:
   - Credits_Canvas
   - Gameplay_Canvas
   - MainMenu_Canvas
+  - BadButton
   layers:
   - Default
   - TransparentFX
