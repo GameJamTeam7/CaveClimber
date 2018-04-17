@@ -50,9 +50,10 @@ namespace Global
         private float MoveSpeed;
         private Vector3 PlayerStartPos;
 
+        private Camera cam;
+
         private bool firstLoop;
 
-        private Canvas currentCanvas;
         private Canvas mainMenu;
         private Canvas gamePlay;
         private Canvas endGame;
@@ -112,7 +113,7 @@ namespace Global
             pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu_Canvas").GetComponent<Canvas>();
             credits = GameObject.FindGameObjectWithTag("Credits_Canvas").GetComponent<Canvas>();
 
-            currentCanvas = mainMenu;
+            cam = Camera.main;
 
             firstLoop = true;
 
@@ -147,6 +148,10 @@ namespace Global
                     firstLoop = false;
                 }
 
+                if (Player.transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize + 2)))
+                {
+                    Die();
+                }
 
                 difficultyTimer += Time.deltaTime;
                 gameTimer += Time.deltaTime;
@@ -227,23 +232,12 @@ namespace Global
             Debug.Log("damage Taken:" + --Health);
             Player.transform.Translate(0, -0.5f, 0);
             //GameOver
-            if (Health <= 0)
-            {
-                currentGameState = GameState.EndState;
-                firstLoop = true;
 
-                //check if we have a high score
-                
-                s.read();
-
-                //Compare this games score to the score in the file IF yes overwrite old score
-                if (score > s.SavedScore)
-                {
-                    s.SavedScore = score;
-                    s.write();
-                }
-            }
             foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+            {
+                Destroy(button);
+            }
+            foreach (var button in GameObject.FindGameObjectsWithTag("BadButton"))
             {
                 Destroy(button);
             }
@@ -315,6 +309,24 @@ namespace Global
             }
               
         }
+
+        private void Die()
+        {
+            currentGameState = GameState.EndState;
+            firstLoop = true;
+
+            //check if we have a high score
+
+            s.read();
+
+            //Compare this games score to the score in the file IF yes overwrite old score
+            if (score > s.SavedScore)
+            {
+                s.SavedScore = score;
+                s.write();
+            }
+        }
+
 
     }
 }
