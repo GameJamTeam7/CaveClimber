@@ -61,6 +61,8 @@ namespace Global
 
         private GameState currentGameState;
 
+        private SaveState s = new SaveState();
+
         #endregion
 
         #region Gets and Sets
@@ -99,10 +101,11 @@ namespace Global
 
         void Start()
         {
-            //currentGameState = GameState.MenuState;
+            currentGameState = GameState.MenuState;
             //Testing
-            currentGameState = GameState.GameState;
+            //currentGameState = GameState.GameState;
 
+            s.read();
             mainMenu = GameObject.FindGameObjectWithTag("MainMenu_Canvas").GetComponent<Canvas>();
             gamePlay = GameObject.FindGameObjectWithTag("Gameplay_Canvas").GetComponent<Canvas>();
             endGame = GameObject.FindGameObjectWithTag("EndGame_Canvas").GetComponent<Canvas>();
@@ -112,7 +115,6 @@ namespace Global
             currentCanvas = mainMenu;
 
             firstLoop = true;
-
 
             gameSpeed = startingSpeed;
             Health = 3;
@@ -128,6 +130,10 @@ namespace Global
                 if (firstLoop)
                 {
                     DisableOtherCanvases(mainMenu);
+                   foreach(GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
+                    {
+                        i.GetComponent<Text>().text = "HighScore: " + s.SavedScore.ToString();
+                    }
                     firstLoop = false;
                     mainMenu.enabled = true;
                 }
@@ -179,6 +185,10 @@ namespace Global
                 if (firstLoop)
                 {
                     DisableOtherCanvases(endGame);
+                    foreach (GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
+                    {
+                        i.GetComponent<Text>().text = "HighScore: " + s.SavedScore.ToString();
+                    }
                     firstLoop = false;
                 }
             }
@@ -223,7 +233,7 @@ namespace Global
                 firstLoop = true;
 
                 //check if we have a high score
-                SaveState s = new SaveState();
+                
                 s.read();
 
                 //Compare this games score to the score in the file IF yes overwrite old score
@@ -242,7 +252,18 @@ namespace Global
         public void StartGame()
         {
             currentGameState = GameState.GameState;
+            //reseting Variables
             Player.transform.position = PlayerStartPos;
+            Health = 3;
+            score = 0;
+            foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+            {
+                Destroy(button);
+            }
+            foreach (var badbutton in GameObject.FindGameObjectsWithTag("BadButton"))
+            {
+                Destroy(badbutton);
+            }
             firstLoop = true;
         }
 
