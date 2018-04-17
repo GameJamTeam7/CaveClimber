@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &549881281
 Light:
   m_ObjectHideFlags: 0
@@ -227,13 +227,13 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -312,6 +312,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
+        type: 2}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1056642573}
     - target: {fileID: 114372318637882048, guid: 1b91c2522dcf2674789baad3685e2229,
         type: 2}
       propertyPath: spawnPoints.Array.data[0]
@@ -332,57 +337,11 @@ Prefab:
       propertyPath: spawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1610936934}
-    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: startingSpeed
-      value: 5.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: difficultyCurve
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: increaseInterval
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: scoreToAdd
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1056642573}
-    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: maxButtonsPerSecond
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979450676995696, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: buttonSpawnRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114372318637882048, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: gracePeriod
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 114372318637882048, guid: 1b91c2522dcf2674789baad3685e2229,
         type: 2}
       propertyPath: badButtonPercent
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 114372318637882048, guid: 1b91c2522dcf2674789baad3685e2229,
-        type: 2}
-      propertyPath: badButtonPrefab
-      value: 
-      objectReference: {fileID: 1887430783613642, guid: 1071a7e7b11727d448b7b249add83353,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b91c2522dcf2674789baad3685e2229, type: 2}
   m_IsPrefabParent: 0
@@ -571,7 +530,7 @@ Camera:
   m_GameObject: {fileID: 1323786621}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -1585,17 +1544,17 @@ Prefab:
     - target: {fileID: 224606338016139854, guid: 0155ec952f316da48a8ecfb847e9cb58,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224606338016139854, guid: 0155ec952f316da48a8ecfb847e9cb58,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224606338016139854, guid: 0155ec952f316da48a8ecfb847e9cb58,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 224606338016139854, guid: 0155ec952f316da48a8ecfb847e9cb58,
         type: 2}

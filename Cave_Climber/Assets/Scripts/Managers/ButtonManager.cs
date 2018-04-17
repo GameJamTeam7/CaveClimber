@@ -52,7 +52,7 @@ public class ButtonManager : MonoBehaviour
                 if (graceTimer > gracePeriod)
                 {
                     randomChance = Random.Range(0, 100);
-                    if(randomChance <= gracePeriod)
+                    if(randomChance >= badButtonPercent)
                     {
                         Instantiate(buttonPrefab, spawnPoints[Random.Range(0, spawnPoints.Count)].position, Quaternion.Euler(-90.0f, 0, 0));
                     }

@@ -99,9 +99,9 @@ namespace Global
 
         void Start()
         {
-            //currentGameState = GameState.MenuState;
+            currentGameState = GameState.MenuState;
             //Testing
-            currentGameState = GameState.GameState;
+            //currentGameState = GameState.GameState;
 
             mainMenu = GameObject.FindGameObjectWithTag("MainMenu_Canvas").GetComponent<Canvas>();
             gamePlay = GameObject.FindGameObjectWithTag("Gameplay_Canvas").GetComponent<Canvas>();
