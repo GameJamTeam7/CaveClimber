@@ -129,7 +129,7 @@ namespace Global
 
                 //>>>>>>> a16bda3a95b9e05da60c5ef0f040a7af8ba36143
                 //PlayerMove
-                if (Player.transform.position.magnitude - PlayerStartPos.magnitude <  0.09)
+                if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
                 {
                     Player.transform.Translate(Vector3.up * MoveSpeed);
                 }
@@ -170,6 +170,22 @@ namespace Global
             {
                 Destroy(button);
             }
+        }
+
+        public void StartGame()
+        {
+            currentGameState = GameState.GameState;
+            Player.transform.position = PlayerStartPos;
+
+        }
+
+        public void EndGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
         }
     }
 }
