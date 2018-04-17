@@ -23,8 +23,11 @@ public class ButtonHandler : MonoBehaviour
             transform.position = transform.position - new Vector3(0, Time.deltaTime * GM.GameSpeed, 0);
             if (transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize + 2)))
             {
+                if (gameObject.tag == "Button")
+                {
+                    GM.TakeDamage();
+                }
                 Destroy(gameObject);
-                GM.TakeDamage();
             }
         }
     }
