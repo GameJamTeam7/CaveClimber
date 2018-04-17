@@ -13,7 +13,8 @@ namespace Global
             MenuState,
             GameState,
             PauseState,
-            EndState
+            EndState,
+            CreditsState
         };
 
         #region  exposed variables
@@ -48,6 +49,15 @@ namespace Global
         private float MoveSpeed;
         private Vector3 PlayerStartPos;
 
+        private bool firstLoop;
+
+        private Canvas currentCanvas;
+        private Canvas mainMenu;
+        private Canvas gamePlay;
+        private Canvas endGame;
+        private Canvas pauseMenu;
+        private Canvas credits;
+
         private GameState currentGameState;
 
         #endregion
@@ -80,15 +90,33 @@ namespace Global
             }
         }
 
+        public float Score
+        {
+            get
+            {
+                return score;
+            }
+        }
 
         #endregion
 
 
         void Start()
         {
-            //currentGameState = GameState.MenuState;
+            currentGameState = GameState.MenuState;
             //Testing
-            currentGameState = GameState.GameState;
+            //   currentGameState = GameState.GameState;
+
+            mainMenu = GameObject.FindGameObjectWithTag("MainMenu_Canvas").GetComponent<Canvas>();
+            gamePlay = GameObject.FindGameObjectWithTag("Gameplay_Canvas").GetComponent<Canvas>();
+            endGame = GameObject.FindGameObjectWithTag("EndGame_Canvas").GetComponent<Canvas>();
+            pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu_Canvas").GetComponent<Canvas>();
+            credits = GameObject.FindGameObjectWithTag("Credits_Canvas").GetComponent<Canvas>();
+
+            currentCanvas = mainMenu;
+
+            firstLoop = true;
+
             buttonsPerSecond = maxButtonsPerSecond;
             gameSpeed = startingSpeed;
             Health = 3;
@@ -101,11 +129,21 @@ namespace Global
         {
             if (currentGameState == GameState.MenuState)
             {
-
+                if (firstLoop)
+                {
+                    DisableOtherCanvases(mainMenu);
+                    firstLoop = false;
+                    mainMenu.enabled = true;
+                }
             }
 
             else if (currentGameState == GameState.GameState)
             {
+                if (firstLoop)
+                {
+                    DisableOtherCanvases(gamePlay);
+                    firstLoop = false;
+                }
                 difficultyTimer += Time.deltaTime;
                 gameTimer += Time.deltaTime;
                 score += Time.deltaTime;
@@ -127,7 +165,6 @@ namespace Global
                 }
                 scoreText.text = ((int)score).ToString();
 
-                //>>>>>>> a16bda3a95b9e05da60c5ef0f040a7af8ba36143
                 //PlayerMove
                 if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
                 {
@@ -137,11 +174,28 @@ namespace Global
 
             else if (currentGameState == GameState.PauseState)
             {
-
+                if (firstLoop)
+                {
+                    DisableOtherCanvases(pauseMenu);
+                    firstLoop = false;
+                }
             }
-            else
-            {
 
+            else if (currentGameState == GameState.EndState)
+            {
+                if (firstLoop)
+                {
+                    DisableOtherCanvases(endGame);
+                    firstLoop = false;
+                }
+            }
+            else if (currentGameState == GameState.CreditsState)
+            {
+                if(firstLoop)
+                {
+                    DisableOtherCanvases(credits);
+                    firstLoop = false;
+                }
             }
 
         }
@@ -153,8 +207,16 @@ namespace Global
 
         public void PauseGame()
         {
-            currentGameState = GameState.PauseState;
-            Time.timeScale = 0;
+            if (currentGameState == GameState.GameState)
+            {
+                currentGameState = GameState.PauseState;
+                firstLoop = true;
+            }
+            else
+            {
+                currentGameState = GameState.GameState;
+                firstLoop = true;
+            }
         }
 
         public void TakeDamage()
@@ -162,10 +224,11 @@ namespace Global
             Debug.Log("damage Taken:" + --Health);
             Player.transform.Translate(0, -0.5f, 0);
             //GameOver
-            //if (Health == 0)
-            //{
-            //    currentGameState = GameState.EndState;
-            //}
+            if (Health <= 0)
+            {
+                currentGameState = GameState.EndState;
+                firstLoop = true;
+            }
             foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
             {
                 Destroy(button);
@@ -176,7 +239,7 @@ namespace Global
         {
             currentGameState = GameState.GameState;
             Player.transform.position = PlayerStartPos;
-
+            firstLoop = true;
         }
 
         public void EndGame()
@@ -187,6 +250,39 @@ namespace Global
                 Application.Quit();
 #endif
         }
+
+        public void OpenCanavs()
+        {
+            currentGameState = GameState.CreditsState;
+            firstLoop = true;
+        }
+
+        private void DisableOtherCanvases(Canvas a_canvas)
+        {
+            a_canvas.enabled = true;
+            if(a_canvas != mainMenu)
+            {
+                mainMenu.enabled = false;
+            }
+            if (a_canvas != gamePlay)
+            {
+                gamePlay.enabled = false;
+            }
+            if (a_canvas != endGame)
+            {
+                endGame.enabled = false;
+            }
+            if (a_canvas != pauseMenu)
+            {
+                pauseMenu.enabled = false;
+            }
+            if (a_canvas != credits)
+            {
+                credits.enabled = false;
+            }
+              
+        }
+
     }
 }
 

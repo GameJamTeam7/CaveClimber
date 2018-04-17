@@ -15,12 +15,14 @@ public class TextureOffset : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        if (GM.CurrentGameState == GameManager.GameState.GameState)
+        {
+            AcumulatedTime += Time.deltaTime * GM.GameSpeed;
+            float offset = AcumulatedTime;
 
-        AcumulatedTime += Time.deltaTime * GM.GameSpeed;
-        float offset = AcumulatedTime;
-
-        GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offset);
-
+            GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offset);
+        }
     }
 }

@@ -31,45 +31,48 @@ public class ButtonManager : MonoBehaviour
 
     void Update()
     {
-        buttonTimer += Time.deltaTime;
-        if (buttonTimer > gm.ButtonsPerSecond)
+        if (gm.CurrentGameState == GameManager.GameState.GameState)
         {
-            buttonTimer = 0;
-            Instantiate(buttonPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].position, Quaternion.Euler(-90.0f, 0, 0));
-        }
+            buttonTimer += Time.deltaTime;
+            if (buttonTimer > gm.ButtonsPerSecond)
+            {
+                buttonTimer = 0;
+                Instantiate(buttonPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].position, Quaternion.Euler(-90.0f, 0, 0));
+            }
 
 #if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform.tag == "Button")
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
                 {
-                    gm.IncresseScore();
-                    Destroy(hit.transform.gameObject);
+                    if (hit.transform.tag == "Button")
+                    {
+                        gm.IncresseScore();
+                        Destroy(hit.transform.gameObject);
+                    }
                 }
             }
-        }
 #endif
 
 #if UNITY_ANDROID
-        foreach (Touch touch in Input.touches)
-        {
-
-            Ray ray = cam.ScreenPointToRay(touch.position);
-            if (Physics.Raycast(ray, out hit))
+            foreach (Touch touch in Input.touches)
             {
-                if (hit.transform.tag == "Button")
-                {
-                    gm.IncresseScore();
-                    Destroy(hit.transform.gameObject);
-                }
-            }
 
-        }
+                Ray ray = cam.ScreenPointToRay(touch.position);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.tag == "Button")
+                    {
+                        gm.IncresseScore();
+                        Destroy(hit.transform.gameObject);
+                    }
+                }
+
+            }
 #endif
 
+        }
     }
 
 
