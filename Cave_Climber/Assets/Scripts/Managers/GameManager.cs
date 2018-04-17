@@ -63,6 +63,8 @@ namespace Global
         private Camera cam;
         private bool firstLoop;
 
+        private AudioSource audioSource;
+
         private Canvas mainMenu;
         private Canvas gamePlay;
         private Canvas endGame;
@@ -121,6 +123,14 @@ namespace Global
             pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu_Canvas").GetComponent<Canvas>();
             credits = GameObject.FindGameObjectWithTag("Credits_Canvas").GetComponent<Canvas>();
 
+
+            foreach(var i in gameObject.GetComponents<AudioSource>())
+            {
+                if (i.clip == null)
+                {
+                    audioSource = i;
+                }
+            }
 
             firstLoop = true;
 
@@ -206,6 +216,8 @@ namespace Global
 
         public void IncresseScore()
         {
+            audioSource.clip = audioClips[0];
+            audioSource.Play();
             score = score + scoreToAdd;
             Player.transform.Translate(Vector3.up * playerClimbAmount);
         }
@@ -226,6 +238,8 @@ namespace Global
 
         public void TakeDamage()
         {
+            audioSource.clip = audioClips[1];
+            audioSource.Play();
             Debug.Log("damage Taken:" + --Health);
             Player.transform.Translate(0, -playerFallDisance, 0);
             //GameOver
