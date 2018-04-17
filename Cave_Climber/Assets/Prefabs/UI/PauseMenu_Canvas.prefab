@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222658474035435382}
   - component: {fileID: 114482788516197438}
   m_Layer: 5
-  m_Name: Score_Text_EndGame (1)
+  m_Name: Score_Text_Paused
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,7 +513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 67, y: 130}
+  m_AnchoredPosition: {x: 70, y: 130}
   m_SizeDelta: {x: 640, y: 120}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224403519741541752
