@@ -37,6 +37,14 @@ namespace Global
 
         [SerializeField]
         private GameObject Player;
+
+        [SerializeField]
+        private float playerClimbAmount;
+
+        [SerializeField]
+        private float playerFallDisance;
+
+
         #endregion
 
         #region private variables
@@ -159,10 +167,10 @@ namespace Global
                 scoreText.text = ((int)score).ToString();
 
                 //PlayerMove
-                if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
-                {
-                    Player.transform.Translate(Vector3.up * MoveSpeed);
-                }
+                //if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
+                //{
+                //    Player.transform.Translate(Vector3.up * MoveSpeed);
+                //}
             }
 
             else if (currentGameState == GameState.PauseState)
@@ -196,6 +204,7 @@ namespace Global
         public void IncresseScore()
         {
             score = score + scoreToAdd;
+            Player.transform.Translate(Vector3.up * playerClimbAmount);
         }
 
         public void PauseGame()
@@ -215,7 +224,7 @@ namespace Global
         public void TakeDamage()
         {
             Debug.Log("damage Taken:" + --Health);
-            Player.transform.Translate(0, -0.5f, 0);
+            Player.transform.Translate(0, -playerFallDisance, 0);
             //GameOver
             if (Health <= 0)
             {
