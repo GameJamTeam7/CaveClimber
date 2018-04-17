@@ -207,9 +207,16 @@ namespace Global
 
         public void PauseGame()
         {
-            currentGameState = GameState.PauseState;
-            firstLoop = true;
-            Time.timeScale = 0;
+            if (currentGameState == GameState.GameState)
+            {
+                currentGameState = GameState.PauseState;
+                firstLoop = true;
+            }
+            else
+            {
+                currentGameState = GameState.GameState;
+                firstLoop = true;
+            }
         }
 
         public void TakeDamage()
@@ -252,6 +259,7 @@ namespace Global
 
         private void DisableOtherCanvases(Canvas a_canvas)
         {
+            a_canvas.enabled = true;
             if(a_canvas != mainMenu)
             {
                 mainMenu.enabled = false;
