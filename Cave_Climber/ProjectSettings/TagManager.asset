@@ -13,6 +13,7 @@ TagManager:
   - Gameplay_Canvas
   - MainMenu_Canvas
   - BadButton
+  - HightScoreTexts
   layers:
   - Default
   - TransparentFX

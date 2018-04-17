@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<float>202.4746</float>
+<float>344.692322</float>
