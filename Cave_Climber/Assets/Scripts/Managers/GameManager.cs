@@ -117,7 +117,7 @@ namespace Global
 
             firstLoop = true;
 
-            buttonsPerSecond = maxButtonsPerSecond;
+            buttonsPerSecond = startingSpeed;
             gameSpeed = startingSpeed;
             Health = 3;
             MoveSpeed = 0.0005f;
