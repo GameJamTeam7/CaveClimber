@@ -37,6 +37,17 @@ namespace Global
 
         [SerializeField]
         private GameObject Player;
+
+        [SerializeField]
+        private float playerClimbAmount;
+
+        [SerializeField]
+        private float playerFallDisance;
+
+        [SerializeField]
+        List<AudioClip> audioClips = new List<AudioClip>();
+
+
         #endregion
 
         #region private variables
@@ -48,12 +59,11 @@ namespace Global
         private float score;
         private int Health;
         private float MoveSpeed;
-        private float ClimbHieght;
         private Vector3 PlayerStartPos;
-
         private Camera cam;
-
         private bool firstLoop;
+
+        private AudioSource audioSource;
 
         private Canvas mainMenu;
         private Canvas gamePlay;
@@ -62,8 +72,6 @@ namespace Global
         private Canvas credits;
 
         private GameState currentGameState;
-
-        private SaveState s = new SaveState();
 
         #endregion
 
@@ -103,25 +111,33 @@ namespace Global
 
         void Start()
         {
-            currentGameState = GameState.MenuState;
+            //currentGameState = GameState.MenuState;
             //Testing
-            //currentGameState = GameState.GameState;
+            currentGameState = GameState.GameState;
 
-            s.read();
+            cam = Camera.main;
+
             mainMenu = GameObject.FindGameObjectWithTag("MainMenu_Canvas").GetComponent<Canvas>();
             gamePlay = GameObject.FindGameObjectWithTag("Gameplay_Canvas").GetComponent<Canvas>();
             endGame = GameObject.FindGameObjectWithTag("EndGame_Canvas").GetComponent<Canvas>();
             pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu_Canvas").GetComponent<Canvas>();
             credits = GameObject.FindGameObjectWithTag("Credits_Canvas").GetComponent<Canvas>();
 
-            cam = Camera.main;
+
+            foreach(var i in gameObject.GetComponents<AudioSource>())
+            {
+                if (i.clip == null)
+                {
+                    audioSource = i;
+                }
+            }
 
             firstLoop = true;
 
+
             gameSpeed = startingSpeed;
             Health = 3;
-            MoveSpeed = 0.0025f;
-            ClimbHieght = 3.35f;
+            MoveSpeed = 0.0005f;
             PlayerStartPos = Player.transform.position;
             scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         }
@@ -136,10 +152,6 @@ namespace Global
                 if (firstLoop)
                 {
                     DisableOtherCanvases(mainMenu);
-                   foreach(GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
-                    {
-                        i.GetComponent<Text>().text = "HighScore: " + ((int)s.SavedScore).ToString();
-                    }
                     firstLoop = false;
                     mainMenu.enabled = true;
                 }
@@ -153,10 +165,6 @@ namespace Global
                     firstLoop = false;
                 }
 
-                if (Player.transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize + 2)))
-                {
-                    Die();
-                }
 
                 difficultyTimer += Time.deltaTime;
                 gameTimer += Time.deltaTime;
@@ -175,10 +183,10 @@ namespace Global
                 scoreText.text = ((int)score).ToString();
 
                 //PlayerMove
-                if (Player.transform.position.magnitude - PlayerStartPos.magnitude < ClimbHieght)
-                {
-                    Player.transform.Translate(Vector3.up * MoveSpeed);
-                }
+                //if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
+                //{
+                //    Player.transform.Translate(Vector3.up * MoveSpeed);
+                //}
             }
 
             else if (currentGameState == GameState.PauseState)
@@ -195,10 +203,6 @@ namespace Global
                 if (firstLoop)
                 {
                     DisableOtherCanvases(endGame);
-                    foreach (GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
-                    {
-                        i.GetComponent<Text>().text = "HighScore: " + ((int)s.SavedScore).ToString();
-                    }
                     firstLoop = false;
                 }
             }
@@ -215,7 +219,10 @@ namespace Global
 
         public void IncresseScore()
         {
+            audioSource.clip = audioClips[0];
+            audioSource.Play();
             score = score + scoreToAdd;
+            Player.transform.Translate(Vector3.up * playerClimbAmount);
         }
 
         public void PauseGame()
@@ -234,15 +241,16 @@ namespace Global
 
         public void TakeDamage()
         {
+            audioSource.clip = audioClips[1];
+            audioSource.Play();
             Debug.Log("damage Taken:" + --Health);
-            Player.transform.Translate(0, -0.5f, 0);
+            Player.transform.Translate(0, -playerFallDisance, 0);
             //GameOver
-
-            foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+            if (transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize + 2)))
             {
-                Destroy(button);
+                Die();
             }
-            foreach (var button in GameObject.FindGameObjectsWithTag("BadButton"))
+                foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
             {
                 Destroy(button);
             }
@@ -251,18 +259,7 @@ namespace Global
         public void StartGame()
         {
             currentGameState = GameState.GameState;
-            //reseting Variables
             Player.transform.position = PlayerStartPos;
-            Health = 3;
-            score = 0;
-            foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
-            {
-                Destroy(button);
-            }
-            foreach (var badbutton in GameObject.FindGameObjectsWithTag("BadButton"))
-            {
-                Destroy(badbutton);
-            }
             firstLoop = true;
         }
 
@@ -317,21 +314,22 @@ namespace Global
 
         private void Die()
         {
-            currentGameState = GameState.EndState;
-            firstLoop = true;
 
-            //check if we have a high score
+                currentGameState = GameState.EndState;
+                firstLoop = true;
 
-            s.read();
+                //check if we have a high score
+                SaveState s = new SaveState();
+                s.read();
 
-            //Compare this games score to the score in the file IF yes overwrite old score
-            if (score > s.SavedScore)
-            {
-                s.SavedScore = score;
-                s.write();
-            }
+                //Compare this games score to the score in the file IF yes overwrite old score
+                if (score > s.SavedScore)
+                {
+                    s.SavedScore = score;
+                    s.write();
+                }
+            
         }
-
 
     }
 }

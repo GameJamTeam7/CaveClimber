@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 114392457475193180}
   - component: {fileID: 114180614702993636}
   m_Layer: 5
-  m_Name: Options Button (1)
+  m_Name: Pause Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2f4da89f9688e40499a3a39e4e1faf26, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33dc0dcc8f3abd24f9ff38bd0bb24ab7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -408,7 +408,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa793cecc905fdf4f9d1f001230c1c33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b58eb137aee16f4e829c909a6a304f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -510,7 +510,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6fb982bfa45968c49b9159b0d682fce6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a54872347ce15943ae70eb0a15321f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -551,7 +551,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 716dd6f156b0e2e4e8dd4bdc1461ef4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ca7cd221364961c44b721797d85d9979, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
