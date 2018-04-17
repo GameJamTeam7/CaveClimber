@@ -158,7 +158,10 @@ namespace Global
                     DisableOtherCanvases(mainMenu);
                     firstLoop = false;
                     mainMenu.enabled = true;
-                    //foreach (GameObject.FindGameObjectWithTag("HightScoreTexts").GetComponent<Text>().text
+                    foreach (GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
+                    {
+                        i.GetComponent<Text>().text = ((int)s.SavedScore).ToString();
+                    }
                         
                         
                         
@@ -212,6 +215,10 @@ namespace Global
                 if (firstLoop)
                 {
                     DisableOtherCanvases(endGame);
+                    foreach (GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
+                    {
+                        i.GetComponent<Text>().text = ((int)s.SavedScore).ToString();
+                    }
                     firstLoop = false;
                 }
             }
