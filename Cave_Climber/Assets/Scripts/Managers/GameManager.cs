@@ -48,6 +48,7 @@ namespace Global
         private float score;
         private int Health;
         private float MoveSpeed;
+        private float ClimbHieght;
         private Vector3 PlayerStartPos;
 
         private bool firstLoop;
@@ -118,7 +119,8 @@ namespace Global
 
             gameSpeed = startingSpeed;
             Health = 3;
-            MoveSpeed = 0.0005f;
+            MoveSpeed = 0.0025f;
+            ClimbHieght = 3.35f;
             PlayerStartPos = Player.transform.position;
             scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         }
@@ -165,7 +167,7 @@ namespace Global
                 scoreText.text = ((int)score).ToString();
 
                 //PlayerMove
-                if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 1.50)
+                if (Player.transform.position.magnitude - PlayerStartPos.magnitude < ClimbHieght)
                 {
                     Player.transform.Translate(Vector3.up * MoveSpeed);
                 }

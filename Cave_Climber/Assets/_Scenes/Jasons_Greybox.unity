@@ -342,6 +342,12 @@ Prefab:
       propertyPath: badButtonPercent
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114372318637882048, guid: 1b91c2522dcf2674789baad3685e2229,
+        type: 2}
+      propertyPath: badButtonPrefab
+      value: 
+      objectReference: {fileID: 1887430783613642, guid: 81318bba9044bb440ba540717bd774b8,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b91c2522dcf2674789baad3685e2229, type: 2}
   m_IsPrefabParent: 0
@@ -1039,6 +1045,10 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1529344222846246, guid: ab8e8fd911bea4344b04ff388e9b6c53, type: 2}
+      propertyPath: m_TagString
+      value: HightScoreTexts
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab8e8fd911bea4344b04ff388e9b6c53, type: 2}
   m_IsPrefabParent: 0
@@ -1610,6 +1620,10 @@ Prefab:
         type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840491675335614, guid: 0155ec952f316da48a8ecfb847e9cb58, type: 2}
+      propertyPath: m_TagString
+      value: HightScoreTexts
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0155ec952f316da48a8ecfb847e9cb58, type: 2}
