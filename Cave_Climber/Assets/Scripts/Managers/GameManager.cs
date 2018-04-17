@@ -126,6 +126,9 @@ namespace Global
             scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         }
 
+        //automaticaly destorys all new variables on programm shut down
+        ~GameManager() { }
+
         void Update()
         {
             if (currentGameState == GameState.MenuState)
