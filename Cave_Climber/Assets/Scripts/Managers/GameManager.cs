@@ -111,9 +111,9 @@ namespace Global
 
         void Start()
         {
-            currentGameState = GameState.MenuState;
+            //currentGameState = GameState.MenuState;
             //Testing
-            //currentGameState = GameState.GameState;
+            currentGameState = GameState.GameState;
 
             cam = Camera.main;
 
@@ -162,10 +162,6 @@ namespace Global
                     {
                         i.GetComponent<Text>().text = ((int)s.SavedScore).ToString();
                     }
-                        
-                        
-                        
-                    //    = ((int)s.SavedScore).ToString();
                 }
             }
 

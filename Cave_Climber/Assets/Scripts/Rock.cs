@@ -6,6 +6,12 @@ public class Rock : MonoBehaviour {
 
     GameManager GM = null;
     private float SelfTimer;
+    [SerializeField]
+    [Tooltip("Rocks Fall Speed")]
+    private float FallSpeed = 0.9f;
+    [SerializeField]
+    [Tooltip("Rocks Despawn Timer")]
+    private float DestroyTime = 10;
 
 	// Use this for initialization
 	void Start ()
@@ -17,8 +23,8 @@ public class Rock : MonoBehaviour {
 	void Update ()
     {
         SelfTimer += Time.deltaTime;
-        this.transform.Translate(-Vector3.up * 0.016f *GM.GameSpeed, Space.World);
-        if (SelfTimer > 30)
+        this.transform.Translate(-Vector3.up * 0.016f * FallSpeed, Space.World);
+        if (SelfTimer > DestroyTime)
         {
             Destroy(this.gameObject);
         }

@@ -329,7 +329,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnObject: {fileID: 1829624103499950, guid: 87592358b29f7ed4aa9eb2b7ef0a0df1,
     type: 2}
-  SpawnTimer: 0
+  SpawnTimer: 1
+  SpawnRate: 0.9
 --- !u!4 &573442822
 Transform:
   m_ObjectHideFlags: 0
@@ -372,11 +373,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficultyCurve: 0.5
+  buttonSpawnRate: 0
   increaseInterval: 1
-  maxButtonsPerSecond: 1
   startingSpeed: 0.1
   scoreToAdd: 10
   Player: {fileID: 125475712}
+  playerClimbAmount: 0
+  playerFallDisance: 0
+  audioClips: []
 --- !u!4 &985770210
 Transform:
   m_ObjectHideFlags: 0
@@ -401,13 +405,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a7d42d9c32616429248546809a3220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 573442822}
-  - {fileID: 1914696503}
-  - {fileID: 1756314982}
-  - {fileID: 1885198845}
+  spawnPoints: []
   buttonPrefab: {fileID: 1063445887373452, guid: 11c97d2b5e5f173419d03063c3aa391e,
     type: 2}
+  badButtonPrefab: {fileID: 0}
+  gracePeriod: 0
+  badButtonPercent: 0
 --- !u!1 &1169560397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1059,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnObject: {fileID: 1829624103499950, guid: 87592358b29f7ed4aa9eb2b7ef0a0df1,
     type: 2}
-  SpawnTimer: 0
+  SpawnTimer: 1
+  SpawnRate: 0.9
 --- !u!4 &1756314982
 Transform:
   m_ObjectHideFlags: 0
@@ -1099,7 +1103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnObject: {fileID: 1829624103499950, guid: 87592358b29f7ed4aa9eb2b7ef0a0df1,
     type: 2}
-  SpawnTimer: 0
+  SpawnTimer: 1
+  SpawnRate: 0.9
 --- !u!4 &1885198845
 Transform:
   m_ObjectHideFlags: 0
@@ -1142,7 +1147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnObject: {fileID: 1829624103499950, guid: 87592358b29f7ed4aa9eb2b7ef0a0df1,
     type: 2}
-  SpawnTimer: 0
+  SpawnTimer: 1
+  SpawnRate: 0.9
 --- !u!4 &1914696503
 Transform:
   m_ObjectHideFlags: 0
