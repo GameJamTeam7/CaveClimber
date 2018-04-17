@@ -101,7 +101,7 @@ namespace Global
         {
             if (currentGameState == GameState.MenuState)
             {
-
+                
             }
 
             else if (currentGameState == GameState.GameState)
@@ -127,7 +127,6 @@ namespace Global
                 }
                 scoreText.text = ((int)score).ToString();
 
-                //>>>>>>> a16bda3a95b9e05da60c5ef0f040a7af8ba36143
                 //PlayerMove
                 if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
                 {
@@ -139,7 +138,8 @@ namespace Global
             {
 
             }
-            else
+
+            else if(currentGameState == GameState.EndState)
             {
 
             }

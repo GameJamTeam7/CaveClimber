@@ -18,11 +18,14 @@ public class ButtonHandler : MonoBehaviour
 
     void Update()
     {
-        transform.position = transform.position - new Vector3(0, Time.deltaTime * GM.GameSpeed, 0);       
-        if(transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize + 2)))
+        if (GM.CurrentGameState == GameManager.GameState.GameState)
         {
-            Destroy(gameObject);
-            GM.TakeDamage();
+            transform.position = transform.position - new Vector3(0, Time.deltaTime * GM.GameSpeed, 0);
+            if (transform.position.y < (cam.transform.position.y - (0.5 * cam.orthographicSize + 2)))
+            {
+                Destroy(gameObject);
+                GM.TakeDamage();
+            }
         }
     }
 }
