@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Global;
 public class TextureOffset : MonoBehaviour {
 
     private float AcumulatedTime = 0.0f;

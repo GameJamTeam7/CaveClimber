@@ -8,14 +8,16 @@ public class Rock : MonoBehaviour {
     private float SelfTimer;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         SelfTimer += Time.deltaTime;
-        this.transform.Translate(-Vector3.up * 0.016f *GM.gameSpeed, Space.World);
+        this.transform.Translate(-Vector3.up * 0.016f *GM.GameSpeed, Space.World);
         if (SelfTimer > 30)
         {
             Destroy(this.gameObject);

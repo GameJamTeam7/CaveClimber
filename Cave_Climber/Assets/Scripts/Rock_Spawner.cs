@@ -16,7 +16,7 @@ public class Rock_Spawner : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        SpawnTimer += Time.deltaTime * GM.gameSpeed;
+        SpawnTimer += Time.deltaTime * GM.GameSpeed;
         if (SpawnTimer >= 1)
         {
             Instantiate(SpawnObject, transform.position, transform.rotation);
