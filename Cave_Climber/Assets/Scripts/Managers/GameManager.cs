@@ -132,7 +132,7 @@ namespace Global
                     DisableOtherCanvases(mainMenu);
                    foreach(GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
                     {
-                        i.GetComponent<Text>().text = "HighScore: " + s.SavedScore.ToString();
+                        i.GetComponent<Text>().text = "HighScore: " + ((int)s.SavedScore).ToString();
                     }
                     firstLoop = false;
                     mainMenu.enabled = true;
@@ -165,7 +165,7 @@ namespace Global
                 scoreText.text = ((int)score).ToString();
 
                 //PlayerMove
-                if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
+                if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 1.50)
                 {
                     Player.transform.Translate(Vector3.up * MoveSpeed);
                 }
@@ -187,7 +187,7 @@ namespace Global
                     DisableOtherCanvases(endGame);
                     foreach (GameObject i in GameObject.FindGameObjectsWithTag("HightScoreTexts"))
                     {
-                        i.GetComponent<Text>().text = "HighScore: " + s.SavedScore.ToString();
+                        i.GetComponent<Text>().text = "HighScore: " + ((int)s.SavedScore).ToString();
                     }
                     firstLoop = false;
                 }
