@@ -86,9 +86,9 @@ namespace Global
 
         void Start()
         {
-            //currentGameState = GameState.MenuState;
+            currentGameState = GameState.MenuState;
             //Testing
-            currentGameState = GameState.GameState;
+         //   currentGameState = GameState.GameState;
             buttonsPerSecond = maxButtonsPerSecond;
             gameSpeed = startingSpeed;
             Health = 3;

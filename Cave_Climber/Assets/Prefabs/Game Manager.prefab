@@ -74,4 +74,5 @@ MonoBehaviour:
   increaseInterval: 1
   maxButtonsPerSecond: 3
   startingSpeed: 0.5
-  scoreMultiplyer: 5
+  scoreToAdd: 0
+  Player: {fileID: 0}
