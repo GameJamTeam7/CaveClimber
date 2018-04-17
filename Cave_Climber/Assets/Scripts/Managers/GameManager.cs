@@ -80,6 +80,13 @@ namespace Global
             }
         }
 
+        public float Score
+        {
+            get
+            {
+                return score;
+            }
+        }
 
         #endregion
 
