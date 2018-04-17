@@ -160,7 +160,7 @@ namespace Global
         public void TakeDamage()
         {
             Debug.Log("damage Taken:" + --Health);
-            //Player.transform.Translate(0, -10, 0);
+            Player.transform.Translate(0, -0.5f, 0);
             //GameOver
             //if (Health == 0)
             //{
