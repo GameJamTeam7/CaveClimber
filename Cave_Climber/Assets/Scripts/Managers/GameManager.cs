@@ -100,12 +100,11 @@ namespace Global
 
         #endregion
 
-
         void Start()
         {
-            currentGameState = GameState.MenuState;
+            //currentGameState = GameState.MenuState;
             //Testing
-            //   currentGameState = GameState.GameState;
+            currentGameState = GameState.GameState;
 
             mainMenu = GameObject.FindGameObjectWithTag("MainMenu_Canvas").GetComponent<Canvas>();
             gamePlay = GameObject.FindGameObjectWithTag("Gameplay_Canvas").GetComponent<Canvas>();
@@ -228,6 +227,17 @@ namespace Global
             {
                 currentGameState = GameState.EndState;
                 firstLoop = true;
+
+                //check if we have a high score
+                SaveState s = new SaveState();
+                s.read();
+
+                //Compare this games score to the score in the file IF yes overwrite old score
+                if (score > s.SavedScore)
+                {
+                    s.SavedScore = score;
+                    s.write();
+                }
             }
             foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
             {
