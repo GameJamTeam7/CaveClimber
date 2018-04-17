@@ -59,10 +59,10 @@ MonoBehaviour:
   - {fileID: 0}
   buttonPrefab: {fileID: 1063445887373452, guid: 11c97d2b5e5f173419d03063c3aa391e,
     type: 2}
-  badButtonPrefab: {fileID: 1887430783613642, guid: cdbf6b38d5e02d040b54958d90e7a63c,
+  badButtonPrefab: {fileID: 1887430783613642, guid: 1071a7e7b11727d448b7b249add83353,
     type: 2}
-  gracePeriod: 30
-  badButtonPercent: 30
+  gracePeriod: 10
+  badButtonPercent: 5
 --- !u!114 &114979450676995696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,9 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ced5469e85321b419c94b80d8b4d490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyCurve: 1.05
-  buttonSpawnRate: 0
-  increaseInterval: 1
-  startingSpeed: 0.5
-  scoreToAdd: 0
+  difficultyCurve: 1
+  buttonSpawnRate: 1
+  increaseInterval: 5
+  startingSpeed: 5.76
+  scoreToAdd: 10
   Player: {fileID: 0}
