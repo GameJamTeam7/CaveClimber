@@ -64,7 +64,6 @@ namespace Global
         private float gameSpeed;
         private Text scoreText;
         private float score;
-        private int Health;
         private Vector3 PlayerStartPos;
         private Camera cam;
         private bool firstLoop;
@@ -146,7 +145,6 @@ namespace Global
 
 
             gameSpeed = startingSpeed;
-            Health = 3;
             PlayerStartPos = Player.transform.position;
             scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
 
