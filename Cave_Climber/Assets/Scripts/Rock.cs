@@ -4,7 +4,6 @@ using UnityEngine;
 using Global;
 public class Rock : MonoBehaviour {
 
-    GameManager GM = null;
     private float SelfTimer;
     [SerializeField]
     [Tooltip("Rocks Fall Speed")]
@@ -12,12 +11,6 @@ public class Rock : MonoBehaviour {
     [SerializeField]
     [Tooltip("Rocks Despawn Timer")]
     private float DestroyTime = 10;
-
-	// Use this for initialization
-	void Start ()
-    {
-        GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-    }
 	
 	// Update is called once per frame
 	void Update ()
