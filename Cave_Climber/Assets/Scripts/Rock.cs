@@ -4,21 +4,20 @@ using UnityEngine;
 using Global;
 public class Rock : MonoBehaviour {
 
-    GameManager GM = null;
     private float SelfTimer;
-
-	// Use this for initialization
-	void Start ()
-    {
-        GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-    }
+    [SerializeField]
+    [Tooltip("Rocks Fall Speed")]
+    private float FallSpeed = 0.9f;
+    [SerializeField]
+    [Tooltip("Rocks Despawn Timer")]
+    private float DestroyTime = 10;
 	
 	// Update is called once per frame
 	void Update ()
     {
         SelfTimer += Time.deltaTime;
-        this.transform.Translate(-Vector3.up * 0.016f *GM.GameSpeed, Space.World);
-        if (SelfTimer > 30)
+        this.transform.Translate(-Vector3.up * 0.016f * FallSpeed, Space.World);
+        if (SelfTimer > DestroyTime)
         {
             Destroy(this.gameObject);
         }
