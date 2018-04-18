@@ -9,7 +9,10 @@ public class TextureOffset : MonoBehaviour {
     private float scrollSpeed;
 
     private float AcumulatedTime = 0.0f;
+
+    [HideInInspector]
     public Renderer rend;
+
     GameManager GM = null;
 
 

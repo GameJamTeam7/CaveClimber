@@ -2,6 +2,8 @@
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using UnityEngine;
+using System;
 
 public class SaveState
 {
@@ -10,16 +12,25 @@ public class SaveState
     {
         XmlSerializer ser = new XmlSerializer(typeof(float));
         
-        TextWriter writer = new StreamWriter("save.txt");
+        
+
+        TextWriter writer = new StreamWriter(Application.persistentDataPath + "/save.txt");
         ser.Serialize(writer, SavedScore);
         writer.Close();
     }
     public void read()
     {
-        TextReader reader = new StreamReader("save.txt");
-        XmlSerializer ser = new XmlSerializer(typeof(float));
+        try
+        {
+            TextReader reader = new StreamReader(Application.persistentDataPath + "/save.txt");
+            XmlSerializer ser = new XmlSerializer(typeof(float));
 
-        SavedScore = (float)ser.Deserialize(reader);
-        reader.Close();
+            SavedScore = (float)ser.Deserialize(reader);
+            reader.Close();
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 }
