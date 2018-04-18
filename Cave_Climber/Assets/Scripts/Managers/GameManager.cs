@@ -64,7 +64,6 @@ namespace Global
         private float gameSpeed;
         private Text scoreText;
         private float score;
-        private int Health;
         private Vector3 PlayerStartPos;
         private Camera cam;
         private bool firstLoop;
@@ -76,6 +75,8 @@ namespace Global
         private Canvas endGame;
         private Canvas pauseMenu;
         private Canvas credits;
+
+        private Animation[] anims;
 
         private GameState currentGameState;
 
@@ -127,6 +128,8 @@ namespace Global
 
             s.read();
 
+            anims = GameObject.FindGameObjectWithTag("Player").GetComponentsInChildren<Animation>();
+
             mainMenu = GameObject.FindGameObjectWithTag("MainMenu_Canvas").GetComponent<Canvas>();
             gamePlay = GameObject.FindGameObjectWithTag("Gameplay_Canvas").GetComponent<Canvas>();
             endGame = GameObject.FindGameObjectWithTag("EndGame_Canvas").GetComponent<Canvas>();
@@ -146,7 +149,6 @@ namespace Global
 
 
             gameSpeed = startingSpeed;
-            Health = 3;
             PlayerStartPos = Player.transform.position;
             scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
 
@@ -161,6 +163,7 @@ namespace Global
             {
                 if (firstLoop)
                 {
+
                     DisableOtherCanvases(mainMenu);
                     firstLoop = false;
                     mainMenu.enabled = true;
@@ -169,7 +172,10 @@ namespace Global
                         i.GetComponent<Text>().text = "High Score: " + ((int)s.SavedScore).ToString();
                     }
 
-
+                    foreach (var anim in anims)
+                    {
+                        anim.Stop();
+                    }
 
                     //    = ((int)s.SavedScore).ToString();
                 }
@@ -181,6 +187,11 @@ namespace Global
                 {
                     DisableOtherCanvases(gamePlay);
                     firstLoop = false;
+
+                    foreach (var anim in anims)
+                    {
+                        anim.Play();
+                    }
                 }
 
 
@@ -206,7 +217,7 @@ namespace Global
                 //if (Player.transform.position.magnitude - PlayerStartPos.magnitude < 0.09)
                 //{
                 //    Player.transform.Translate(Vector3.up * MoveSpeed);
-                //}
+                //} 
 
             }
 
@@ -218,6 +229,7 @@ namespace Global
                     firstLoop = false;
                     GameObject.FindGameObjectWithTag("PauseScore").GetComponent<Text>().text = ((int)score).ToString();
                 }
+
             }
 
             else if (currentGameState == GameState.EndState)
@@ -259,11 +271,22 @@ namespace Global
             if (currentGameState == GameState.GameState)
             {
                 currentGameState = GameState.PauseState;
+
+                foreach (var anim in anims)
+                {
+                    anim.Stop();
+                }
+
                 firstLoop = true;
             }
             else
             {
                 currentGameState = GameState.GameState;
+                foreach (var anim in anims)
+                {
+                    anim.Play();
+                }
+
                 firstLoop = true;
             }
         }
@@ -273,6 +296,9 @@ namespace Global
             audioSource.clip = audioClips[1];
             audioSource.Play();
             Player.transform.Translate(0, -playerFallDisance, 0);
+
+
+
             //GameOver
             if (Player.transform.position.y < (cam.transform.position.y - (cam.orthographicSize)))
             {
@@ -351,6 +377,12 @@ namespace Global
             currentGameState = GameState.EndState;
             firstLoop = true;
 
+            foreach (var anim in anims)
+            {
+                anim.Stop();
+            }
+
+
             //check if we have a high score
             s.read();
 
@@ -362,6 +394,20 @@ namespace Global
             }
 
         }
+
+        private IEnumerator startAnim()
+        {
+            yield return new WaitForSeconds(1f);
+
+
+            foreach (var anim in anims)
+            {
+                anim.Play();
+            }
+
+
+        }
+
 
     }
 }

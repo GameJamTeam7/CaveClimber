@@ -7,7 +7,7 @@ public class Rock : MonoBehaviour {
     private float SelfTimer;
     [SerializeField]
     [Tooltip("Rocks Fall Speed")]
-    private float FallSpeed = 0.9f;
+    private float FallSpeed;
     [SerializeField]
     [Tooltip("Rocks Despawn Timer")]
     private float DestroyTime = 10;
